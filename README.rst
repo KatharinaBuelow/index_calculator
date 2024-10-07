@@ -49,11 +49,11 @@ You can install the package directly with pip:
 
      pip install index_calculator
 
-If you want to contribute, we recommend cloning the repository, setup a conda environmant and installing the package in development mode, e.g.
+If you want to contribute, we recommend to fork the repository to your github account, cloning the repository, create a branch, setup a conda environmant and installing the package in development mode, e.g.
 
 .. code-block:: console
 
-    git clone https://github.com/ludwiglierhammer/index_calculator
+    git clone https://github.com/YOUR_GIT_REPOSITORY/index_calculator
     cd index_calculator
     conda env create -f ci/requirements/environment.yml
     conda activate xcalc-tests
