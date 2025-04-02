@@ -191,5 +191,28 @@
       "ci_package_reference"
     ],
     "drs_format": "hyras/{}/{}/{}/{}/{}/{}"
-  }
+  },
+   "CHIRPS": {
+    "components": [
+      "ci_name",
+      "version",
+      "ci_institute_id",
+      "ci_frequency",
+      "ci_timerange_index"
+    ],
+    "format": "{}_v{}_{}_{}_{}.nc",
+    "icomponents": [
+        "resolution",
+	"version",
+	"year",
+	"fequency",
+	"resolution"
+    ],
+    "iformat": "chirps-v{}.{}.{}_p05.nc",
+    "drs_components": [
+      "version",
+      "resolution",
+    ],
+    "drs_format": "chirps/v{}/{}"
+  }  
 }
