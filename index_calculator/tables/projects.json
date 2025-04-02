@@ -210,9 +210,13 @@
     ],
     "iformat": "chirps-v{}.{}.{}_p05.nc",
     "drs_components": [
-      "version",
-      "resolution",
+      "ci_institute_id",
+      "realization",
+      "horizontal_resolution",
+      "ci_frequency",
+      "ci_name",
+      "ci_package_reference"
     ],
-    "drs_format": "chirps/v{}/{}"
+    "drs_format": "chirps/{}/{}/{}/{}/{}/{}"
   }  
 }
