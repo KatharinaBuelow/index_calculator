@@ -196,19 +196,19 @@
     "components": [
       "ci_name",
       "version",
-      "ci_institute_id",
+      "horizontal_resolution",
       "ci_frequency",
       "ci_timerange_index"
     ],
     "format": "{}_v{}_{}_{}_{}.nc",
-    "icomponents": [
-        "resolution",
-	"version",
+       "icomponents": [
+	"variable_id",
+        "version",
 	"year",
 	"fequency",
-	"resolution"
+	"horizontal_resolution"
     ],
-    "iformat": "chirps-v{}.{}.{}_p05.nc",
+    "iformat": "{}_chirps-v{}.{}.{}_{}.nc",
     "drs_components": [
       "ci_institute_id",
       "realization",
