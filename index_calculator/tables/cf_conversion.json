@@ -21,5 +21,17 @@
     "units": {
       "pr": "mm day-1"
     }
+  },
+ "ERA5LAND": {
+     "variables": {
+      "202":"tasmin",
+      "201":"tasmax",
+      "167":"tas",
+      "228": "pr"
+    },
+    "units": {
+      "pr": "m day-1"
+    }
   }
+    
 }

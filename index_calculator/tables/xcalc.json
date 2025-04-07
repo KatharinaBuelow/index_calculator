@@ -39,6 +39,11 @@
       "ci_product": "reanalysis_derived"
     }
   },
+  "ERA5LAND": {
+    "global_att": {
+      "ci_product": "reanalysis_derived"
+    }
+  },
   "HYRAS": {
     "global_att": {
       "ci_product": "observational_derived"

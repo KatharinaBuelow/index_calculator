@@ -166,6 +166,28 @@
     ],
     "drs_format": "era5/{}/ECMWF/IFS/ERA5/{}/atmos/{}/{}/{}"
   },
+  "ERA5LAND": {
+    "components": [
+      "ci_name",
+      "ci_frequency",
+      "ci_timerange_index"
+    ],
+    "format": "{}_era5-land_{}_{}.nc",
+      "icomponents": [
+      "year",
+      "mon",
+      "variable_id",
+      "frequency"
+    ],
+    "iformat": "Elsf12_1H_{}-{}_{}_{}.nc",
+      "drs_components": [
+      "ci_institute_id",  
+      "ci_frequency",
+      "ci_name",
+      "ci_package_reference"
+    ],
+    "drs_format": "era5-land/{}/{}/{}/{}"
+  },
   "HYRAS": {
     "components": [
       "ci_name",
