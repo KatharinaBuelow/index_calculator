@@ -24,10 +24,10 @@
   },
  "ERA5LAND": {
      "variables": {
-      "202":"tasmin",
-      "201":"tasmax",
-      "167":"tas",
-      "228": "pr"
+      "mn2t":"tasmin",
+      "mx2t":"tasmax",
+      "2t":"tas",
+      "tp": "pr"
     },
     "units": {
       "pr": "m day-1"

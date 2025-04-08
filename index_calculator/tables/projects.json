@@ -222,7 +222,7 @@
       "ci_frequency",
       "ci_timerange_index"
     ],
-    "format": "{}_v{}_{}_{}_{}.nc",
+    "format": "{}_chirps_{}_{}_{}_{}.nc",
        "icomponents": [
 	"variable_id",
         "version",
@@ -233,7 +233,6 @@
     "iformat": "{}_chirps-v{}.{}.{}_{}.nc",
     "drs_components": [
       "ci_institute_id",
-      "realization",
       "horizontal_resolution",
       "ci_frequency",
       "ci_name",

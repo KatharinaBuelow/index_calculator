@@ -1,6 +1,7 @@
 import pyhomogenize as pyh
 import xarray as xr
 from pyhomogenize._consts import fmt as _fmt
+import pandas as pd
 
 from ._consts import _bounds
 from ._tables import cfjson, fjson
@@ -100,11 +101,18 @@ class PreProcessing:
                 f"Try one of {fjson.keys()}.",
             )
         conv = fjson[self.ifreq]
+        # nur fuer era5land
+        #ds['time'] = pd.DatetimeIndex(ds['time'].values)
         if conv["freq"] == xr.infer_freq(ds.time):
             return ds
         data_vars = {}
+        print("conv[var]: ", conv["var"].keys)
+        print("conv[var]: ", conv["var"])
+        print("ds.data_vars: ", ds.data_vars)
         for dvar in ds.data_vars:
+            print("dvar: ", dvar)
             if dvar in conv["var"].keys():
+                print("dvar in conv[var]: ", dvar)
                 data_vars[dvar] = getattr(
                     ds[dvar].resample(time=conv["freq"]),
                     conv["var"][dvar],
@@ -113,6 +121,7 @@ class PreProcessing:
                     conv["var"][dvar]
                 )
                 coords = data_vars[dvar].coords
+                print("coords: ", coords)
         return xr.Dataset(
             data_vars=data_vars,
             coords=coords,
