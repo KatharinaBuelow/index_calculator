@@ -103,6 +103,9 @@ class PreProcessing:
         conv = fjson[self.ifreq]
         # nur fuer era5land
         #ds['time'] = pd.DatetimeIndex(ds['time'].values)
+        print('ifreq: ', self.ifreq)
+        ds.attrs["frequency"] = self.ifreq
+        #
         if conv["freq"] == xr.infer_freq(ds.time):
             return ds
         data_vars = {}
@@ -129,14 +132,16 @@ class PreProcessing:
         )
 
     def _preprocessing(self):
-        ds_ = self._convert_to_frequency(self.ds)
-        time_control = pyh.time_control(ds_)
+        ds_ = self._rename_variable_names(self.ds)
+        ds__ = self._convert_to_frequency(ds_)
+        time_control = pyh.time_control(ds__)
         if not self.var_name:
             self.var_name = time_control.name
 
         avail_time = get_time_range_as_str(time_control.time, self.afmt)
 
         if self.time_range:
+            print("time_range: ", self.time_range)
             time_control.select_time_range(self.time_range)
         if self.crop_time_axis:
             time_control.select_limited_time_range(
@@ -146,5 +151,6 @@ class PreProcessing:
         if self.check_time_axis:
             time_control.check_timestamps(correct=True)
         self.ATimeRange = avail_time
-        ds = time_control.ds
-        return self._rename_variable_names(ds)
+        #ds = time_control.ds
+        #return self._rename_variable_names(ds)
+        return time_control.ds
