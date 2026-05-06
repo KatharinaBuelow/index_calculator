@@ -19,7 +19,7 @@
       "mn2t": "tasmin",
       "tp": "pr",
       "mx2t": "tasmax",
-      "t2m": "tas",
+      "t2m": "tas"
     },
     "units": {
       "pr": "mm day-1"
