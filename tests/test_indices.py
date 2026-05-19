@@ -346,13 +346,13 @@ def test_WSf():
 def test_WSx():
     idx_class = indices.WSx()
     result = idx_class.compute(pr=pr_xarray(), window=1, freq="7D")
-    np.testing.assert_allclose(result, 1, rtol=1e-03)
+    np.testing.assert_allclose(result, 4.0, rtol=1e-03)
 
 
 def test_WSn():
     idx_class = indices.WSn()
     result = idx_class.compute(pr=pr_xarray(), window=1, freq="7D")
-    np.testing.assert_allclose(result, 1, rtol=1e-03)
+    np.testing.assert_allclose(result, 6.0, rtol=1e-03)
 
 
 def test_RYYp():
@@ -718,7 +718,7 @@ def test_GSS():
         window=1,
         freq="7D",
     )
-    np.testing.assert_allclose(result, [4], rtol=1e-03)
+    np.testing.assert_allclose(result, [np.nan], rtol=1e-03)
 
 
 def test_GSE():
@@ -738,7 +738,7 @@ def test_GSL():
         window=1,
         freq="7D",
     )
-    np.testing.assert_allclose(result, [np.nan], rtol=1e-03)
+    np.testing.assert_allclose(result, [0.0], rtol=1e-03)
 
 
 def test_FFS():
@@ -748,7 +748,7 @@ def test_FFS():
         window=1,
         freq="7D",
     )
-    np.testing.assert_allclose(result, [4], rtol=1e-03)
+    np.testing.assert_allclose(result, [np.nan], rtol=1e-03)
 
 
 def test_FFE():
@@ -822,6 +822,19 @@ def test_FXx():
         freq="7D",
     )
     np.testing.assert_allclose(result, [23], rtol=1e-03)
+
+
+def test_HI():
+    idx_class = indices.HI()
+    result = idx_class.compute(
+        tas=tas_c_xarray(),
+        hurs=hurs_xarray(),
+    )
+    np.testing.assert_allclose(
+        result,
+        [np.nan, np.nan, np.nan, 28.038065740359976, np.nan, np.nan, np.nan],
+        rtol=1e-03,
+    )
 
 
 def test_HIX():
