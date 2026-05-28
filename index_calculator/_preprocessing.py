@@ -4,7 +4,7 @@ from pyhomogenize._consts import fmt as _fmt
 
 from ._consts import _bounds
 from ._tables import cfjson, fjson
-from ._utils import check_existance, get_time_range_as_str, kwargs_to_self
+from ._utils import check_existance, get_time_range_as_str, kwargs_to_self, normalize_pandas_freq
 
 
 class PreProcessing:
@@ -100,9 +100,10 @@ class PreProcessing:
                 f"Try one of {fjson.keys()}.",
             )
         conv = fjson[self.ifreq]
-        if conv["freq"] == xr.infer_freq(ds.time):
+        if "time" in ds.coords and conv["freq"] == normalize_pandas_freq(xr.infer_freq(ds["time"])):
             return ds
         data_vars = {}
+        coords = ds.coords
         for dvar in ds.data_vars:
             if dvar in conv["var"].keys():
                 data_vars[dvar] = getattr(
@@ -113,6 +114,11 @@ class PreProcessing:
                     conv["var"][dvar]
                 )
                 coords = data_vars[dvar].coords
+
+        # If none of the variables require conversion, return the input dataset unchanged.
+        if not data_vars:
+            return ds
+
         return xr.Dataset(
             data_vars=data_vars,
             coords=coords,
@@ -120,6 +126,8 @@ class PreProcessing:
         )
 
     def _preprocessing(self):
+        if "valid_time" in self.ds.coords and "time" not in self.ds.coords:
+            self.ds = self.ds.rename({"valid_time": "time"})
         ds_ = self._convert_to_frequency(self.ds)
         time_control = pyh.time_control(ds_)
         if not self.var_name:
