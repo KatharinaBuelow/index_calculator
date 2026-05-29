@@ -14,7 +14,7 @@ class PreProcessing:
     ----------
     ds : xr.Dataset
         xarray Dataset.
-    project: {"CORDEX", "CMIP5", "CMIP6", "EOBS", "ERA5", "N/A"}
+    project: {"CORDEX", "CORDEX-CMIP6", "CMIP5", "CMIP6", "EOBS", "ERA5", "N/A"}
         (default: "N/A), optional
         Project name
     var_name : str or list, optional
