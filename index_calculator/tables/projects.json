@@ -130,7 +130,7 @@
       "ci_frequency",
       "ci_timerange_index"
     ],
-    "format": "{}_{}_{}_{}_{}_{}_{}_{}_{}_{}_{}_{}.nc",
+    "format": "{}_{}_{}_{}_{}_{}_{}_{}_{}_{}_{}_{}_{}.nc",
     "icomponents": [
       "variable_id",
       "domain_id",

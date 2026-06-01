@@ -89,6 +89,19 @@ def normalize_pandas_freq(freq):
         return freq
 
     freq = freq.strip()
+
+    # Handle legacy year-start/year-end aliases with optional multipliers.
+    # Examples: "5AS" -> "5YS", "5AS-JUL" -> "5YS-JUL", "10A" -> "10YE".
+    match = re.match(r"^(?P<n>\d+)(?P<kind>AS|A)(?P<suffix>-.+)?$", freq)
+    if match is not None:
+        n = match.group("n")
+        kind = match.group("kind")
+        suffix = match.group("suffix") or ""
+        if kind == "AS":
+            return f"{n}YS{suffix}"
+        if kind == "A":
+            return f"{n}YE{suffix}"
+
     if freq == "AS":
         return "YS"
     if freq.startswith("AS-"):
@@ -113,3 +126,80 @@ def normalize_pandas_freq(freq):
             return f"{n}BQE{suffix}"
 
     return freq
+
+
+def normalize_frequency_key(freq):
+    """Normalize user-provided frequency strings to index_calculator keys.
+
+    The index_calculator internals use descriptive keys like "day", "week",
+    "mon", "year", "yearAC" and "yearHydro". Users may however provide
+    pandas offset aliases (ex: "YE", "YS", legacy "A"/"AS", or anchored
+    variants like "YE-JUN").
+
+    This helper maps those inputs to the internal keys, so downstream lookups
+    (ex: pyhomogenize._consts.fmt and index_calculator._consts._bounds/_split)
+    remain stable across pandas versions.
+    """
+
+    if freq is None:
+        return None
+    if not isinstance(freq, str):
+        return freq
+
+    f = freq.strip()
+    if not f:
+        return f
+
+    # Pass through already-normalized internal keys.
+    internal = {
+        "fx",
+        "day",
+        "week",
+        "mon",
+        "sem",
+        "year",
+        "yearAC",
+        "yearHydro",
+    }
+    if f in internal:
+        return f
+
+    # Handle common human-friendly variants.
+    fl = f.lower()
+    if fl in {"annual", "ann", "yearly"}:
+        return "year"
+    if fl in {"monthly", "month"}:
+        return "mon"
+    if fl in {"weekly"}:
+        return "week"
+    if fl in {"daily"}:
+        return "day"
+
+    # Normalize legacy pandas aliases first (A/AS/Q/etc.).
+    f_norm = normalize_pandas_freq(f)
+
+    # Water year variants used by this project.
+    # yearAC: Jul..Jun (year ends in Jun).
+    if f_norm in {"YE-JUN", "YS-JUL"}:
+        return "yearAC"
+    # yearHydro: Sep..Aug (year ends in Aug).
+    if f_norm in {"YE-AUG", "YS-SEP"}:
+        return "yearHydro"
+
+    # Generic year aliases (also accept multipliers like "5YE").
+    if re.match(r"^(\d+)?(YE|YS)(-.+)?$", f_norm) is not None:
+        return "year"
+
+    # Generic month aliases.
+    if re.match(r"^(\d+)?(M|ME|MS)(-.+)?$", f_norm) is not None:
+        return "mon"
+
+    # Generic week aliases (W or W-<DAY>).
+    if re.match(r"^(\d+)?W(-[A-Z]{3})?$", f_norm) is not None:
+        return "week"
+
+    # Generic day alias.
+    if re.match(r"^(\d+)?D$", f_norm) is not None:
+        return "day"
+
+    return f

@@ -33,6 +33,27 @@ def test_processing():
     xcalc.outputwriter(postproc_obj=postproc)
 
 
+def test_preprocessing_accepts_pandas_year_aliases():
+    data = tas_day_netcdf()
+    tas_ds = open_xrdataset(data)
+
+    preproc = xcalc.preprocessing(
+        tas_ds,
+        freq="YE",
+        crop_time_axis=False,
+        project="CORDEX",
+    )
+    assert preproc.freq == "year"
+
+    preproc_ac = xcalc.preprocessing(
+        tas_ds,
+        freq="YE-JUN",
+        crop_time_axis=False,
+        project="CORDEX",
+    )
+    assert preproc_ac.freq == "yearAC"
+
+
 def test_time_range_index_calculator():
     data = tas_day_netcdf()
     tas_ds = open_xrdataset(data)

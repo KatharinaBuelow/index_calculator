@@ -6,6 +6,10 @@ def test_normalize_pandas_freq_year_aliases():
     assert utils.normalize_pandas_freq("AS-JAN") == "YS-JAN"
     assert utils.normalize_pandas_freq("A") == "YE"
     assert utils.normalize_pandas_freq("A-DEC") == "YE-DEC"
+    assert utils.normalize_pandas_freq("5AS") == "5YS"
+    assert utils.normalize_pandas_freq("5AS-JUL") == "5YS-JUL"
+    assert utils.normalize_pandas_freq("5A") == "5YE"
+    assert utils.normalize_pandas_freq("10A-DEC") == "10YE-DEC"
 
 
 def test_normalize_pandas_freq_quarter_aliases():
