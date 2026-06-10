@@ -23,13 +23,13 @@ _bounds = {
 
 _split = {
     "fx": False,
-    "day": "5A",
-    "week": "10A",
-    "mon": "10A",
-    "sem": "10A",
-    "year": "20A",
-    "yearAC": "20A",
-    "yearHydro": "20A",
+    "day": "5YE",
+    "week": "10YE",
+    "mon": "10YE",
+    "sem": "10YE",
+    "year": "20YE",
+    "yearAC": "20YE",
+    "yearHydro": "20YE",
 }
 
 _base_period = ["1971", "2000"]
