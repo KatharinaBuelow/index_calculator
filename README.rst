@@ -9,9 +9,9 @@ Calculate climate indicators with standardized project-specific attributes: inde
 +----------------------------+-----------------------------------------------------+
 | Open Source                | |license| |zenodo|                                  |
 +----------------------------+-----------------------------------------------------+
-| Coding Standards           | |black| |ruff| |pre-commit| |security| |fossa|      |
+| Coding Standards           | |black| |pre-commit|                                |
 +----------------------------+-----------------------------------------------------+
-| Development Status         | |status| |build| |coveralls|                        |
+| Development Status         | |status| |build|                                    |
 +----------------------------+-----------------------------------------------------+
 
 Python index_calculator is an xclim wrapper to calculate climate indicators from CMORized netCDF files.
@@ -65,7 +65,7 @@ This will install the package but you can still edit it and you don't need the p
 Requirements
 ------------
 
-* python3.6 or higher
+* python3.11 or higher
 
 * xclim
 
