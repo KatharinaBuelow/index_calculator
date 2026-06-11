@@ -126,7 +126,7 @@
       "version_realization",
       "table_id",
       "activity_id",
-      "ci_institute_id",
+      "ci_institution_id",
       "ci_frequency",
       "ci_timerange_index"
     ],
@@ -137,7 +137,7 @@
       "driving_source_id",
       "driving_experiment_id",
       "driving_variant_label",
-      "driving_institution_id",
+      "institution_id",
       "source_id",
       "version_realization",
       "table_id",
@@ -147,8 +147,8 @@
     "drs_components": [
       "activity_id",
       "domain_id",
-      "ci_institute_id",
-      "driving_institution_id",
+      "ci_institution_id",
+      "institution_id",
       "driving_source_id",
       "driving_experiment_id",
       "driving_variant_label",
