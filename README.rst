@@ -9,7 +9,7 @@ Calculate climate indicators with standardized project-specific attributes: inde
 +----------------------------+-----------------------------------------------------+
 | Open Source                | |license| |zenodo|                                  |
 +----------------------------+-----------------------------------------------------+
-| Coding Standards           | |black| |ruff| |pre-commit| |security| |fossa|      |
+| Coding Standards           | |black| |pre-commit|                                |
 +----------------------------+-----------------------------------------------------+
 | Development Status         | |status| |build| |coveralls|                        |
 +----------------------------+-----------------------------------------------------+
